@@ -75,7 +75,7 @@ def generate_message(changed: dict, added: dict, removed: dict) -> str:
     :param removed: Dict of changed dependencies from `get_removed_deps`.
     :return: GitHub PR comment text.
     """
-    msg = '<!-- pipenv-diff -->\n\nDependency changes from `Pipfile.lock`:\n\n'
+    msg = '<!-- pipfile-diff -->\n\nDependency changes from `Pipfile.lock`:\n\n'
     if changed:
         txt = '\n'.join(sorted({f'{k} {v["base"]} => {v["head"]}' for k, v in changed.items()}))
         msg += f'**Changed**\n```\n{txt.strip()}\n```\n'
@@ -108,7 +108,7 @@ def create_comment(message: str) -> None:
     # Check for existing comment
     existing_issue_id = None
     for c in pull.get_issue_comments():
-        if c.body.startswith('<!-- pipenv-diff -->'):
+        if c.body.startswith('<!-- pipfile-diff -->'):
             existing_issue_id = c.id
             break
 

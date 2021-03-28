@@ -1,4 +1,4 @@
-name: 'Pipenv diff'
+name: 'Pipfile diff'
 description: 'Pull request comments for dependency changes in Pipfile.lock.'
 author: 'atwalsh'
 inputs: 
