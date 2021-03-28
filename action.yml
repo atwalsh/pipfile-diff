@@ -1,0 +1,26 @@
+name: 'Pipenv diff'
+description: 'Pull request comments for dependency changes in Pipfile.lock.'
+author: 'atwalsh'
+inputs: 
+  base-sha:
+    description: "Git SHA of the bash commit"
+    required: true
+    default: ${{ github.event.pull_request.base.sha }}
+  head-sha:
+    description: "Git SHA of the head commit"
+    required: true
+    default: ${{ github.event.pull_request.head.sha }}
+  repo-token:
+    description: 'Token for the repository. Can be passed in using `{{ secrets.GITHUB_TOKEN }}`.'
+    required: true
+    default: ${{ github.token }}
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.base-sha }}
+    - ${{ inputs.head-sha }}
+    - ${{ inputs.repo-token }}
+branding:
+  icon: "package"
+  color: "white"
